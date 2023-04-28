@@ -3,25 +3,26 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\User;
+use rmrevin\yii\fontawesome\FontAwesome;
 
 /** @var yii\web\View $this */
 /** @var app\models\PadreTutor $model */
 
 $this->title = 'Padre-Tutor #' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Padre Tutors', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+
+
 \yii\web\YiiAsset::register($this);
 ?>
+<?= $this->render('../site/_column2_menus', ['items' => $items]) ?>
 <div class="padre-tutor-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a(FontAwesome::icon('pencil') . ' Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(FontAwesome::icon('trash') . ' Desactivar / Activar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Está seguro que desea modificar el estado de este registro?',
                 'method' => 'post',
             ],
         ]) ?>

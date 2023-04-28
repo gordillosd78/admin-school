@@ -13,7 +13,7 @@ echo "<?php\n";
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 
 /* @var $this yii\web\View */
@@ -24,24 +24,24 @@ $this->title = ' <?= Inflector::camel2words(StringHelper::basename($generator->m
 <?= "<?= " ?>$this->render('../site/_column2_menus', ['model' => $model, 'items'=>$items]) ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
     <legend>
-        <h1><?= "<?= " ?>FAS::icon('eye')->border() . Html::encode($this->title) ?></h1>
+        <h1><?= "<?= " ?>FontAwesome::icon('eye')->border() . Html::encode($this->title) ?></h1>
     </legend>
 
     <p>
-        <?= "<?= " ?>Html::a(FAS::icon('pencil').<?= $generator->generateString(' Modificar') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary']) ?>
-        <?= "<?= " ?>Html::a(FAS::icon('trash').<?= $generator->generateString(' Desactivar / Activar') ?>, ['delete', <?= $urlParams ?>], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => <?= $generator->generateString('¿Está seguro que desea modificar el estado de este registro?') ?>,
-                'method' => 'post',
-            ],
+        <?= "<?= " ?>Html::a(FontAwesome::icon('pencil').<?= $generator->generateString(' Modificar') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary']) ?>
+        <?= "<?= " ?>Html::a(FontAwesome::icon('trash').<?= $generator->generateString(' Desactivar / Activar') ?>, ['delete', <?= $urlParams ?>], [
+        'class' => 'btn btn-danger',
+        'data' => [
+        'confirm' => <?= $generator->generateString('¿Está seguro que desea modificar el estado de este registro?') ?>,
+        'method' => 'post',
+        ],
         ]) ?>
     </p>
 
     <div class="col-md-8 col-md-offset-2 well">
         <?= "<?= " ?>DetailView::widget([
-            'model' => $model,
-            'attributes' => [
+        'model' => $model,
+        'attributes' => [
         <?php
         if (($tableSchema = $generator->getTableSchema()) === false) {
             foreach ($generator->getColumnNames() as $name) {
@@ -53,7 +53,7 @@ $this->title = ' <?= Inflector::camel2words(StringHelper::basename($generator->m
                 if ($format === 'boolean')
                     echo "            [
                     'attribute' => '$column->name',
-                    'value' => $" . 'model->' . $column->name . " ? FAS::icon('check')->border() : FAS::icon('close')->border(),
+                    'value' => $" . 'model->' . $column->name . " ? FontAwesome::icon('check')->border() : FontAwesome::icon('close')->border(),
                     'format' => 'raw'
                 ],\n";
                 elseif ($column->name === 'created_by')

@@ -19,8 +19,8 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use rmrevin\yii\fontawesome\FAS;
-use kartik\form\ActiveForm;
+use rmrevin\yii\fontawesome\FontAwesome;
+use yii\widgets\ActiveForm;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 
 /* @var $this yii\web\View */
@@ -28,11 +28,11 @@ use <?= ltrim($generator->modelClass, '\\') ?>;
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 <?php $diabledAttributes = ['habilitado', 'created_by', 'updated_by', 'created_at', 'updated_at']; ?>
-<div class="col-md-8 col-md-offset-2 well">
-	<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
+<div class="col-md-9">
+	<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form bg-light p-3">
 
 		<?= "<?php " ?>$form = ActiveForm::begin([
-		    'options' => ['class' => 'disable-submit-buttons']
+		'options' => ['class' => 'disable-submit-buttons']
 		]);
 		?>
 
@@ -42,12 +42,12 @@ use <?= ltrim($generator->modelClass, '\\') ?>;
 			}
 		} ?>
 
-		<div class="col-md-6 col-md-offset-3 form-group">
+		<div class="mt-4 d-md-flex flex-colum justify-content-evenly align-items-center form-group">
 			<?= "<?= " ?>Html::submitButton(
-			$model->isNewRecord ? FAS::icon('bars').' Crear' : FAS::icon('pencil').' Modificar',
+			$model->isNewRecord ? FontAwesome::icon('bars').' Crear' : FontAwesome::icon('pencil').' Modificar',
 			[
-			    'class' => $model->isNewRecord ? 'btn btn-success btn-lg btn-block' : 'btn btn-primary btn-lg btn-block',
-			    'data' => ['disabled-text' => 'Procesando...']
+			'class' => $model->isNewRecord ? 'btn btn-success w-75 btn-lg btn-block' : 'btn btn-primary w-75 btn-lg btn-block',
+			'data' => ['disabled-text' => 'Procesando...']
 			])
 			<?= "?>\n" ?>
 		</div>

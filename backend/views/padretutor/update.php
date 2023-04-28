@@ -6,10 +6,9 @@ use yii\helpers\Html;
 /** @var app\models\PadreTutor $model */
 
 $this->title = 'Update Padre Tutor: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Padre Tutors', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
+<?= $this->render('../site/_column2_menus', ['items' => $items]) ?>
+
 <div class="padre-tutor-update">
 
     <h1><?= Html::encode($this->title) ?></h1>

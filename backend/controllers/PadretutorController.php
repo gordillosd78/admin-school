@@ -5,7 +5,7 @@ namespace backend\controllers;
 use app\models\PadreTutor;
 use app\models\search\PadreTutorSearch;
 use backend\controllers\CommonController;
-use yii\web\Controller;
+use Yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class PadretutorController extends CommonController
 {
+    public $layout = 'column2';
+
     /**
      * @inheritDoc
      */
@@ -45,6 +47,7 @@ class PadretutorController extends CommonController
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'items' => $this->getMenu()
         ]);
     }
 
@@ -63,6 +66,7 @@ class PadretutorController extends CommonController
 
         return $this->render('view', [
             'model' => $model,
+            'items' => $this->getMenu()
         ]);
     }
 
@@ -74,6 +78,7 @@ class PadretutorController extends CommonController
     public function actionCreate()
     {
         $model = new PadreTutor();
+        // $this->debugVariable(Yii::$app->request->post());
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
@@ -88,7 +93,8 @@ class PadretutorController extends CommonController
 
         return $this->render('create', [
             'model' => $model,
-            'listaEstados' => $listaEstados
+            'listaEstados' => $listaEstados,
+            'items' => $this->getMenu()
         ]);
     }
 
@@ -115,7 +121,8 @@ class PadretutorController extends CommonController
 
         return $this->render('update', [
             'model' => $model,
-            'listaEstados' => $listaEstados
+            'listaEstados' => $listaEstados,
+            'items' => $this->getMenu()
         ]);
     }
 
@@ -154,7 +161,6 @@ class PadretutorController extends CommonController
         if (($model = PadreTutor::findOne(['id' => $id])) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

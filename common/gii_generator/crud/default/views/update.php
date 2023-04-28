@@ -12,7 +12,9 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
+
+
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
@@ -23,10 +25,10 @@ $this->title = <?= $generator->generateString(' Modificar {modelClass}: ', ['mod
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-update">
     <legend>
-        <h1><?= "<?= " ?>FAS::icon('bars') . Html::encode($this->title) ?></h1>
+        <h1><?= "<?= " ?>FontAwesome::icon('bars') . Html::encode($this->title) ?></h1>
     </legend>
     <?= "<?= " ?>$this->render('_form', [
-        'model' => $model,
+    'model' => $model,
     ]) ?>
 
 </div>

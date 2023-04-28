@@ -10,9 +10,9 @@ use yii\widgets\ActiveForm;
 /** @var app\models\PadreTutor $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
-<div class="col-md-8 col-md-offset-2 well">
+<div class="col-md-9">
 
-    <div class="padre-tutor-form">
+    <div class="padre-tutor-form bg-light p-3">
 
         <?php $form = ActiveForm::begin(); ?>
 
@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'localidad')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'fecha_nacimiento')->textInput(['type' => 'date']) ?>
+        <!-- <?= $form->field($model, 'fecha_nacimiento')->textInput(['type' => 'date']) ?> -->
 
         <!-- <div class="col-md-4">
         <? //$form->field($model, 'fecha_nacimiento')->widget(
@@ -50,18 +50,16 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'estado')->dropDownList($listaEstados) ?>
 
-        <div class="col-md-6 col-md-offset-3 mt-5 form-group d-flex justify-content-center">
+        <div class="mt-4 d-md-flex flex-colum justify-content-evenly align-items-center form-group">
             <?= Html::submitButton(
                 $model->isNewRecord ? ' Crear' : ' Modificar',
                 [
-                    'class' => $model->isNewRecord ? 'btn btn-success w-100 btn-lg btn-block' : 'btn btn-primary btn-lg btn-block',
+                    'class' => $model->isNewRecord ? 'btn btn-success w-75 btn-lg btn-block' : 'btn btn-primary w-75 btn-lg btn-block',
                     'data' => ['disabled-text' => 'Procesando...']
                 ]
             )
             ?>
-
         </div>
-
         <?php ActiveForm::end(); ?>
     </div>
 </div>

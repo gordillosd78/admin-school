@@ -14,7 +14,7 @@ echo "<?php\n";
 
 use yii\helpers\Html;
 use <?= $generator->indexWidgetType === 'grid' ? "kartik\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 <?= $generator->enablePjax ? 'use yii\widgets\Pjax;' : '' ?>
 
@@ -29,18 +29,18 @@ $this->title = <?= ' \' Administrar ' . Inflector::camel2words(StringHelper::bas
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index">
 
     <legend>
-        <h1><?= "<?= " ?>FAS::icon('cogs')->border().Html::encode($this->title) ?></h1>
+        <h1><?= "<?= " ?>FontAwesome::icon('cogs')->border().Html::encode($this->title) ?></h1>
     </legend>
 
-<?php if (!empty($generator->searchModelClass)) : ?>
-    <?= "    <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
-<?php endif; ?>
+    <?php if (!empty($generator->searchModelClass)) : ?>
+        <?= "    <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php endif; ?>
     <p>
-        <?= "<?= " ?>Html::a(FAS::icon('bars'). <?= $generator->generateString(' Nuevo ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, ['create'], ['class' => 'btn btn-success']) ?>
+        <?= "<?= " ?>Html::a(FontAwesome::icon('bars'). <?= $generator->generateString(' Nuevo ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= $generator->enablePjax ? "<?php Pjax::begin(); ?>\n" : '' ?>
     <?php if ($generator->indexWidgetType === 'grid') : ?>
-    <?= "<?= " ?>GridView::widget([
+        <?= "<?= " ?>GridView::widget([
         'dataProvider' => $dataProvider,
         <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => [\n" : "'columns' => [\n"; ?>
         <?php
