@@ -7,7 +7,7 @@ use yii\web\AssetBundle;
 /**
  * Class FontAwesomeAsset
  *
- * @author Miguel Prieto <mikyvato@gmail.com>
+ * @author Sergio Gordillo <gordillo78@gmail.com>
  * @package app\assets
  */
 class FontAwesomeAsset extends AssetBundle

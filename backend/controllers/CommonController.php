@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use rmrevin\yii\fontawesome\FAS;
+use rmrevin\yii\fontawesome\FontAwesome;
 
 class CommonController extends Controller
 {
@@ -73,7 +73,7 @@ class CommonController extends Controller
                 $session->setFlash(
                     'success',
                     '<strong> ' .
-                        FAS::icon('check-square')->border()->size(FAS::SIZE_2X) . ' ' . $message
+                        Fontawesome::icon('check-square')->border()->size(Fontawesome::SIZE_2X) . ' ' . $message
                         . '</strong> '
                 );
                 $session->set('popup', true); // -- establezco popups usando el parametro
@@ -82,7 +82,7 @@ class CommonController extends Controller
                 $session->setFlash(
                     'error',
                     '<strong> ' .
-                        FAS::icon('bomb')->border()->size(FAS::SIZE_2X) . ' ' . $message
+                        Fontawesome::icon('bomb')->border()->size(Fontawesome::SIZE_2X) . ' ' . $message
                         . '</strong> '
                 );
                 break;
@@ -90,7 +90,7 @@ class CommonController extends Controller
                 $session->setFlash(
                     'info',
                     '<strong> ' .
-                        FAS::icon('info-circle')->border()->size(FAS::SIZE_2X) . ' ' . $message
+                        Fontawesome::icon('info-circle')->border()->size(Fontawesome::SIZE_2X) . ' ' . $message
                         . '</strong> '
                 );
                 break;
@@ -98,7 +98,7 @@ class CommonController extends Controller
                 $session->setFlash(
                     'warning',
                     '<strong> ' .
-                        FAS::icon('radiation-alt')->border()->size(FAS::SIZE_2X) . ' ' . $message
+                        Fontawesome::icon('radiation-alt')->border()->size(Fontawesome::SIZE_2X) . ' ' . $message
                         . '</strong> '
                 );
                 break;
@@ -106,7 +106,7 @@ class CommonController extends Controller
                 $session->setFlash(
                     'error',
                     '<strong> ' .
-                        FAS::icon('bomb')->border()->size(FAS::SIZE_2X) . ' ERROR AL CARGAR MENSAJE DE RETORNO'
+                        Fontawesome::icon('bomb')->border()->size(Fontawesome::SIZE_2X) . ' ERROR AL CARGAR MENSAJE DE RETORNO'
                         . '</strong> '
                 );
                 break;
@@ -142,12 +142,12 @@ class CommonController extends Controller
     {
         if ($url === NULL) {
             $items[] = [
-                'label' => FAS::icon($icon) . ' ' . $label,
+                'label' => FontAwesome::icon($icon) . ' ' . $label,
                 'items' => $scond_item
             ];
         } else {
             $items[] = [
-                'label' => FAS::icon($icon) . ' ' . $label,
+                'label' => FontAwesome::icon($icon) . ' ' . $label,
                 'url' => [$url]
             ];
         }
