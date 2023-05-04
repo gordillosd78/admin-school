@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FontAwesome;
-use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
 use app\models\Espacio;
 
 /* @var $this yii\web\View */
@@ -24,9 +24,9 @@ use app\models\Espacio;
 
 		<?= $form->field($model, 'tipo_espacio_id')->dropDownList($listaTipoEspacio) ?>
 
-		<?= $form->field($model, 'observacion')->textInput(['maxlength' => true]) ?>
+		<?= $form->field($model, 'observacion')->textarea(['maxlength' => true]) ?>
 
-		<?= $form->field($model, 'estado')->dropDownList($listaEstados) ?>
+		<?= $form->field($model, 'estado')->dropDownList($model->getEstado()) ?>
 
 		<div class="mt-4 d-md-flex flex-colum justify-content-evenly align-items-center form-group">
 			<?= Html::submitButton(

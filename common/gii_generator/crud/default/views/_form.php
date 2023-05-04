@@ -20,7 +20,7 @@ echo "<?php\n";
 
 use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FontAwesome;
-use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 
 /* @var $this yii\web\View */

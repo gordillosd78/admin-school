@@ -3,7 +3,9 @@
 namespace backend\controllers;
 
 use app\models\PadreTutor;
+use app\models\Parentesco;
 use app\models\search\PadreTutorSearch;
+use app\models\TipoEmpleado;
 use backend\controllers\CommonController;
 use Yii;
 use yii\web\NotFoundHttpException;
@@ -87,13 +89,16 @@ class PadretutorController extends CommonController
                     return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
-            $listaEstados = PadreTutor::getEstado();
+            $listaParentesco = Parentesco::getArrayParentesco();
+            $listaTipoEmpleado = TipoEmpleado::getArrayTipoEmpleado();
+
             $model->loadDefaultValues();
         }
 
         return $this->render('create', [
             'model' => $model,
-            'listaEstados' => $listaEstados,
+            'listaParentesco' => $listaParentesco,
+            'listaTipoEmpleado' => $listaTipoEmpleado,
             'items' => $this->getMenu()
         ]);
     }
@@ -108,7 +113,9 @@ class PadretutorController extends CommonController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $listaEstados = PadreTutor::getEstado();
+        $listaParentesco = Parentesco::getArrayParentesco();
+        $listaTipoEmpleado = TipoEmpleado::getArrayTipoEmpleado();
+
         $model->fecha_nacimiento = $model->setFecha($model->fecha_nacimiento);
 
         if ($this->request->isPost && $model->load($this->request->post())) {
@@ -121,7 +128,8 @@ class PadretutorController extends CommonController
 
         return $this->render('update', [
             'model' => $model,
-            'listaEstados' => $listaEstados,
+            'listaParentesco' => $listaParentesco,
+            'listaTipoEmpleado' => $listaTipoEmpleado,
             'items' => $this->getMenu()
         ]);
     }

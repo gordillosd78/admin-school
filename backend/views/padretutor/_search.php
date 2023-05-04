@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var app\models\PadreTutorSearch $model */
@@ -25,21 +25,29 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'domicilio') ?>
 
-    <?php // echo $form->field($model, 'localidad') ?>
+    <?php // echo $form->field($model, 'localidad') 
+    ?>
 
-    <?php // echo $form->field($model, 'fecha_nacimiento') ?>
+    <?php // echo $form->field($model, 'fecha_nacimiento') 
+    ?>
 
-    <?php // echo $form->field($model, 'observacion') ?>
+    <?php // echo $form->field($model, 'observacion') 
+    ?>
 
-    <?php // echo $form->field($model, 'estado') ?>
+    <?php // echo $form->field($model, 'estado') 
+    ?>
 
-    <?php // echo $form->field($model, 'created_at') ?>
+    <?php // echo $form->field($model, 'created_at') 
+    ?>
 
-    <?php // echo $form->field($model, 'updated_at') ?>
+    <?php // echo $form->field($model, 'updated_at') 
+    ?>
 
-    <?php // echo $form->field($model, 'created_by') ?>
+    <?php // echo $form->field($model, 'created_by') 
+    ?>
 
-    <?php // echo $form->field($model, 'updated_by') ?>
+    <?php // echo $form->field($model, 'updated_by') 
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -22,10 +22,10 @@ use yii\helpers\ArrayHelper;
  * @property integer $updated_by
  *
  * @property User $createdBy
+ * @property User $updatedBy
  * @property Division[] $divisions
  * @property Espacio $espacio
  * @property Turno $turno
- * @property User $updatedBy
  */
 class Curso extends MyActiveRecord
 {

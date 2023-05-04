@@ -40,12 +40,20 @@ $this->title = 'Padre - Tutor'; ?>
             //'id',
             'nombre',
             'apellido',
+            'dni',
             'domicilio',
             'localidad',
+
             [
                 'attribute' => 'fecha_nacimiento',
                 'value' => function ($model) {
                     return $model->getFecha($model->fecha_nacimiento);
+                }
+            ],
+            [
+                'attribute' => 'parentesco_id',
+                'value' => function ($model) {
+                    return $model->parentesco->nombre;
                 }
             ],
             [
@@ -63,7 +71,7 @@ $this->title = 'Padre - Tutor'; ?>
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Acciones',
-                'template' => '{view}{update}{delete}',
+                'template' => '{view}{update}',
             ],
         ],
     ]); ?>

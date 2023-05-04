@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FontAwesome;
 
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Curso */
 

@@ -17,7 +17,7 @@ class PadreTutorSearch extends PadreTutor
     public function rules()
     {
         return [
-            [['id', 'dni', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'dni', 'estado', 'parentesco_id', 'tipo_empleado_id', 'created_by', 'updated_by'], 'integer'],
             [['nombre', 'apellido', 'domicilio', 'localidad', 'fecha_nacimiento', 'observacion', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -62,6 +62,8 @@ class PadreTutorSearch extends PadreTutor
             'dni' => $this->dni,
             'fecha_nacimiento' => $this->fecha_nacimiento,
             'estado' => PadreTutor::STATUS_ACTIVE,
+            'parentesco_id' => $this->parentesco_id,
+            'tipo_empleado_id' => $this->tipo_empleado_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,

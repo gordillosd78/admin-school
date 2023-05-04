@@ -9,10 +9,11 @@ namespace app\models\query;
  */
 class PadreTutorQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+    public function active()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->andWhere('[[estado]]=1');
+    }
+
 
     /**
      * {@inheritdoc}

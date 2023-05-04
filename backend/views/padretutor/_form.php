@@ -4,7 +4,8 @@ use yii\helpers\Html;
 use kartik\widgets\DatePicker;
 //use kartik\select2\select2;
 
-use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
+use kartik\widgets\Select2;
 
 /** @var yii\web\View $this */
 /** @var app\models\PadreTutor $model */
@@ -28,6 +29,36 @@ use yii\widgets\ActiveForm;
 
         <!-- <?= $form->field($model, 'fecha_nacimiento')->textInput(['type' => 'date']) ?> -->
 
+        <?= $form->field($model, 'parentesco_id')->widget(
+            Select2::class,
+            [
+                'data' => $listaParentesco,
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'options' => [
+                    'placeholder' => 'Seleccione un Parentesco...',
+                    'multiple' => false,
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]
+        ) ?>
+
+        <?= $form->field($model, 'tipo_empleado_id')->widget(
+            Select2::class,
+            [
+                'data' => $listaTipoEmpleado,
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'options' => [
+                    'placeholder' => 'Seleccione una Ocupacion...',
+                    'multiple' => false,
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]
+        ) ?>
+
         <!-- <div class="col-md-4">
         <? //$form->field($model, 'fecha_nacimiento')->widget(
         //DatePicker::class,
@@ -46,9 +77,9 @@ use yii\widgets\ActiveForm;
         ?>
         </div> -->
 
-        <?= $form->field($model, 'observacion')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'observacion')->textarea(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'estado')->dropDownList($listaEstados) ?>
+        <?= $form->field($model, 'estado')->dropDownList($model->getEstado()) ?>
 
         <div class="mt-4 d-md-flex flex-colum justify-content-evenly align-items-center form-group">
             <?= Html::submitButton(

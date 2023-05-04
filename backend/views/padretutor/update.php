@@ -15,7 +15,10 @@ $this->title = 'Update Padre Tutor: ' . $model->id;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'listaEstados' => $listaEstados
+        'listaEstados' => $listaEstados,
+        'listaParentesco' => $listaParentesco,
+        'listaTipoEmpleado' => $listaTipoEmpleado,
+
     ]) ?>
 
 </div>

@@ -31,6 +31,17 @@ AppAsset::register($this);
 
     <header>
         <?php
+
+        $session = Yii::$app->session;
+        if ($session->has('items')) {
+            $items = $session->get('items');
+        }
+        if ($session->has('second_items'))
+            $second_items = $session->get('second_items');
+        $second_options[] = '';
+
+
+
         NavBar::begin([
             'brandLabel' => Yii::$app->name,
             'brandUrl' => Yii::$app->homeUrl,
@@ -44,10 +55,18 @@ AppAsset::register($this);
         if (Yii::$app->user->isGuest) {
             $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
         }
-        echo Nav::widget([
-            'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
-            'items' => $menuItems,
-        ]);
+        // echo Nav::widget([
+        //     'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
+        //     'items' => $menuItems,
+        // ]);
+
+        if (!empty($items)) {
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
+                'encodeLabels' => false,
+                'items' => $items,
+            ]);
+        }
         if (Yii::$app->user->isGuest) {
             echo Html::tag('div', Html::a('Login', ['/site/login'], ['class' => ['btn btn-link login text-decoration-none']]), ['class' => ['d-flex']]);
         } else {

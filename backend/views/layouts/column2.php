@@ -1,6 +1,6 @@
 <?php
 
-use yii\bootstrap5\Tabs;
+use kartik\tabs\TabsX;
 use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
@@ -14,11 +14,11 @@ $this->beginContent('@app/views/layouts/main.php'); ?>
     <div class="col-sm-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h4 class="panel-title"><i class="fa fa-bars"></i> Panel de Acciones</h4>
+                <h4 class="panel-title"><?= FontAwesome::icon('bars') . ' Panel de Acciones' ?></h4>
             </div>
             <div class="panel-body">
                 <?=
-                Tabs::widget([
+                TabsX::widget([
                     'options' => ['class' => 'nav flex-column nav-pills nav-stacked'],
                     'items' => isset($this->params['sub_menus']) ? $this->params['sub_menus'] : [],
                 ]);

@@ -11,27 +11,27 @@ use kartik\select2\Select2;
 /* @var $form yii\bootstrap\ActiveForm */
 
 ?>
-<div class="panel panel-default">
+<div class="d-flex flex-column">
     <div class="panel-heading">
         <h4 class="panel-title"><?= $title ?></h4>
     </div>
-    <div class="panel-body">
+    <div class="panel-body d-flex flex-column">
         <div class="form-group">
-            <div class="col-md-10">
+            <div class="d-flex w-90">
                 <?php
                 if (isset($components) && count($components) > 0) {
                     $form = ActiveForm::begin([
                         'formConfig' => ['deviceSize' => ActiveForm::SIZE_SMALL, 'autocomplete' => 'off']
                     ]);
                     foreach ($components as $key => $items) {
-                        $options = ['class' => [$items['htmlClass']]];
+                        $options = ['class' =>   [$items['htmlClass']]];
                         switch ($items['type']) {
                             case 'date':
                                 echo Html::beginTag('div', $options);
                                 echo $form->field($model, $items['name'], ['showLabels' => false])->widget(
                                     DatePicker::class,
                                     [
-                                        'bsVersion' => '3',
+                                        'bsVersion' => '5.x',
                                         'options' => ['placeholder' => isset($items['placeholder']) ? $items['placeholder'] : '', 'autocomplete' => 'off'],
                                         'type' => DatePicker::TYPE_COMPONENT_APPEND,
                                         'pickerIcon' => '<i class="fas fa-calendar-alt text-primary"></i>',
@@ -49,7 +49,7 @@ use kartik\select2\Select2;
                                 echo $form->field($model, $items['name'], ['showLabels' => false])->widget(
                                     Select2::class,
                                     [
-                                        'bsVersion' => '3',
+                                        'bsVersion' => '5.x',
                                         'data' => $items['list'],
                                         'options' => [
                                             'placeholder' => isset($items['placeholder']) ? $items['placeholder'] : 'Seleccion una opcion...',
@@ -80,7 +80,7 @@ use kartik\select2\Select2;
                     echo 'FORMULARIO DE GRUPO';
                 ?>
             </div>
-            <div class="col-md-2">
+            <div class="d-flex flex-column w-40">
                 <?= Html::a(FAS::icon('bars') . ' Nuevo', [$this->context->id . '/create'], ['class' => 'btn btn-success btn-block']) ?>
                 <?= Html::submitButton(FAS::icon('search') . ' Buscar', ['class' => 'btn btn-primary btn-block']) ?>
                 <?= Html::a(FAS::icon('refresh') . ' Limpiar', ['reset'], ['class' => 'btn btn-warning btn-block']) ?>

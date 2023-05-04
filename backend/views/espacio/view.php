@@ -44,7 +44,7 @@ $this->title = ' Espacio: ' . $model->id;
                 'observacion',
                 [
                     'attribute' => 'estado',
-                    'value' => $model->getestado($model->estado)
+                    'value' => $model->getEstado($model->estado)
                 ],
                 'created_at',
                 'updated_at',

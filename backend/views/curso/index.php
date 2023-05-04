@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use rmrevin\yii\fontawesome\FontAwesome;
-use app\models\Curso;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -28,6 +27,10 @@ $this->title =  ' Administrar Curso';
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions' => [
+
+            'class' => 'table table-bordered table-striped table-wrap'
+        ],
         'columns' => [
             'id',
             'nombre',

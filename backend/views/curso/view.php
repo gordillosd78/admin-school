@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use rmrevin\yii\fontawesome\FontAwesome;
-use app\models\Curso;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Curso */
@@ -48,7 +47,7 @@ $this->title = ' Curso: ' . $model->id;
                 'observacion',
                 [
                     'attribute' => 'estado',
-                    'value' => $model->getestado($model->estado)
+                    'value' => $model->getEstado($model->estado)
                 ],
                 'created_at',
                 'updated_at',

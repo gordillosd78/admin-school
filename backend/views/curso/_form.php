@@ -2,8 +2,7 @@
 
 use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FontAwesome;
-use yii\widgets\ActiveForm;
-use app\models\Curso;
+use kartik\form\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Curso */
@@ -18,15 +17,15 @@ use app\models\Curso;
 
 		<?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
-		<?= $form->field($model, 'observacion')->textInput(['maxlength' => true]) ?>
-
 		<?= $form->field($model, 'turno_id')->dropDownList($listaTurnos) ?>
 
 		<?= $form->field($model, 'division_id')->dropDownList($listaDivision) ?>
 
 		<?= $form->field($model, 'espacio_id')->dropDownList($listaEspacios) ?>
 
-		<?= $form->field($model, 'estado')->dropDownList($listaEstados) ?>
+		<?= $form->field($model, 'observacion')->textarea(['maxlength' => true]) ?>
+
+		<?= $form->field($model, 'estado')->dropDownList($model->getEstado()) ?>
 
 		<div class="mt-4 d-md-flex flex-colum justify-content-evenly align-items-center form-group">
 			<?= Html::submitButton(

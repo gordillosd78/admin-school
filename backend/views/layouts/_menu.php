@@ -1,25 +1,23 @@
 <?php
 
-use rmrevin\yii\fontawesome\FA;
-use kartik\nav\NavX;
-use rmrevin\yii\fontawesome\FAR;
+use yii\bootstrap5\Nav;
+use rmrevin\yii\fontawesome\FontAwesome;
 
 ?>
 <div class="panel panel-default">
     <!-- Default panel contents -->
 
     <div class="panel-body">
-        <?= NavX::widget([
-            'bsVersion' => '3',
+        <?= Nav::widget([
             'encodeLabels' => false,
             'options' => ['class' => 'nav nav-pills nav-stacked'],
             'items' => [
-                ['label' => FA::icon('copyright') . ' Compras', 'url' => ['compra/index']],
-                ['label' => FA::icon('copyright') . ' Auditorias', 'url' => ['auditoria/index']],
-                ['label' => FA::icon('share') . ' Egresos', 'url' => ['egresos/index']],
-                ['label' => FA::icon('exchange') . ' Movimientos', 'url' => ['movimiento/index']],
-                ['label' => FA::icon('edit') . ' Presupuestos', 'url' => ['presupuestos/index']],
-                ['label' => FA::icon('share-square-o') . ' Ventas', 'url' => ['ventas/index']],
+                ['label' => FontAwesome::icon('copyright') . ' Compras', 'url' => ['compra/index']],
+                ['label' => FontAwesome::icon('copyright') . ' Auditorias', 'url' => ['auditoria/index']],
+                ['label' => FontAwesome::icon('share') . ' Egresos', 'url' => ['egresos/index']],
+                ['label' => FontAwesome::icon('exchange') . ' Movimientos', 'url' => ['movimiento/index']],
+                ['label' => FontAwesome::icon('edit') . ' Presupuestos', 'url' => ['presupuestos/index']],
+                ['label' => FontAwesome::icon('share-square-o') . ' Ventas', 'url' => ['ventas/index']],
             ],
         ]); ?>
     </div>

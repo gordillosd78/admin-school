@@ -37,6 +37,18 @@ $this->title = 'Padre-Tutor #' . $model->id;
                 'dni',
                 'domicilio',
                 'localidad',
+                [
+                    'attribute' => 'parentesco_id',
+                    'value' => function ($model) {
+                        return $model->parentesco->nombre;
+                    }
+                ],
+                [
+                    'attribute' => 'tipo_empleado_id',
+                    'value' => function ($model) {
+                        return $model->tipoEmpleado->nombre;
+                    }
+                ],
                 'fecha_nacimiento',
                 // [
                 //     'attribute' => 'fecha_nacimiento',
@@ -45,7 +57,7 @@ $this->title = 'Padre-Tutor #' . $model->id;
                 'observacion',
                 [
                     'attribute' => 'estado',
-                    'value' => $model->getestado($model->estado)
+                    'value' => $model->getEstado($model->estado)
                 ],
                 'created_at',
                 'updated_at',
