@@ -14,7 +14,6 @@ $this->title = Yii::t('app', ' Nuevo Padre-Tutor'); ?>
 
     <?= $this->render('_form', [
         'model' => $model,
-        'listaEstados' => $listaEstados,
         'listaParentesco' => $listaParentesco,
         'listaTipoEmpleado' => $listaTipoEmpleado,
 

@@ -43,13 +43,15 @@ class PadretutorController extends CommonController
      */
     public function actionIndex()
     {
+        $items = $this->addItems($this->getMenu(), 'barcode', 'Alumno', 'alumno/index');
+
         $searchModel = new PadreTutorSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'items' => $this->getMenu()
+            'items' => $items
         ]);
     }
 
@@ -79,6 +81,7 @@ class PadretutorController extends CommonController
      */
     public function actionCreate()
     {
+
         $model = new PadreTutor();
         // $this->debugVariable(Yii::$app->request->post());
 
@@ -91,7 +94,6 @@ class PadretutorController extends CommonController
         } else {
             $listaParentesco = Parentesco::getArrayParentesco();
             $listaTipoEmpleado = TipoEmpleado::getArrayTipoEmpleado();
-
             $model->loadDefaultValues();
         }
 
