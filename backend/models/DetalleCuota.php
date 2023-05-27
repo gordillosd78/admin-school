@@ -11,14 +11,15 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "detalle_cuota".
  *
  * @property integer $id
- * @property integer $periodo
  * @property double $subtotal
- * @property integer $cantidad
  * @property double $interes
  * @property integer $cuota_id
  * @property integer $concepto_id
  * @property string $observacion
  * @property integer $estado
+ * @property string $vencimiento
+ * @property string $periodo_pago
+ * @property string $periodo
  * @property string $created_at
  * @property string $updated_at
  * @property integer $created_by
@@ -31,18 +32,7 @@ use yii\helpers\ArrayHelper;
  */
 class DetalleCuota extends MyActiveRecord
 {
-
     private $_subTotal;
-
-
-    // public static $periodo = [
-    //     '1' => 'Enero', '2' => 'Febrero', '3' => 'Marzo',
-    //     '4' => 'Abril', '5' => 'Mayo', '6' => 'Junio',
-    //     '7' => 'Julio', '8' => 'Agosto', '9' => 'Setiembre',
-    //     '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre'
-    // ];
-
-
 
     /**
      * Setter del total de la linea
@@ -80,10 +70,10 @@ class DetalleCuota extends MyActiveRecord
     {
         return [
             [['interes'], 'number'],
-            [['periodo', 'cantidad', 'cuota_id', 'concepto_id', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['periodo_pago', 'periodo', 'cuota_id', 'concepto_id', 'estado', 'created_by', 'updated_by'], 'integer'],
             [['cuota_id', 'concepto_id'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
-            [['observacion'], 'string', 'max' => 250],
+            [['observacion', 'vencimiento'], 'string', 'max' => 250],
             [['concepto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Concepto::class, 'targetAttribute' => ['concepto_id' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['cuota_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cuota::class, 'targetAttribute' => ['cuota_id' => 'id']],
@@ -98,11 +88,12 @@ class DetalleCuota extends MyActiveRecord
     {
         return [
             'id' => 'ID',
-            'periodo' => 'Periodo',
-            'cantidad' => 'Cantidad',
+            'periodo_pago' => 'Periodo de Pago',
             'interes' => 'Interes',
             'cuota_id' => 'Cuota',
             'concepto_id' => 'Concepto',
+            'periodo' => 'Periodo',
+            'vencimiento' => 'Vencimiento',
             'observacion' => 'Observacion',
             'estado' => 'Estado',
             'created_at' => 'Created At',
@@ -169,10 +160,10 @@ class DetalleCuota extends MyActiveRecord
      * @params @integer valor del indice del array
      * @return @array
      */
-    public static function getMes($key = null)
+    public static function getPeriodoPago($key = null)
     {
         if ($key !== null)
-            return self::$meses[$key] . '/' . date('Y');
+            return self::$meses[$key] . '-' . date('Y');
         return self::$meses;
     }
 }

@@ -49,6 +49,7 @@ class CuotaSearch extends Cuota
         $query = Cuota::find();
 
         // add conditions that should always apply here
+        $query->andFilterWhere(['alumno_id' => $this->alumno_id]);
         $query->andFilterWhere(['estado' => $this->estado]);
 
         $desde = $this->setFecha($this->fechaDesde);

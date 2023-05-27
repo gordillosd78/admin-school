@@ -18,8 +18,9 @@ class DetalleCuotaSearch extends DetalleCuota
     public function rules()
     {
         return [
-            [['id', 'periodo', 'cantidad', 'cuota_id', 'concepto_id', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'periodo_pago', 'periodo', 'cuota_id', 'concepto_id', 'estado', 'created_by', 'updated_by'], 'integer'],
             [['interes'], 'number'],
+            [['vencimiento'], 'string'],
             [['observacion', 'created_at', 'updated_at'], 'safe'],
         ];
     }

@@ -39,6 +39,7 @@ class DetallecuotaController extends CommonController
         $this->layout = 'column1';
         $model = new DetalleCuota();
         $model->cuota_id = $cuota_id;
+        $modelCuota = Cuota::findOne($cuota_id);
         $searchModel = new DetalleCuotaSearch();
         $searchModel->cuota_id = $cuota_id;
         $dataProvider = $searchModel->search();
@@ -46,6 +47,7 @@ class DetallecuotaController extends CommonController
         $listadoPeriodos = $model->getMes();
         return $this->render('view', [
             'model' => $model,
+            'modelCuota' => $modelCuota,
             'dataProvider' => $dataProvider,
             'listadoConceptos' => $listadoConceptos,
             'listadoPeriodos' => $listadoPeriodos,
@@ -62,8 +64,12 @@ class DetallecuotaController extends CommonController
     {
         $model = new DetalleCuota();
         $model->cuota_id = $cuota_id;
+        $model->vencimiento = $model->setFecha($model->vencimiento);
+        // $model->periodo = $model->concepto->nombre; //debo agregar el pperiodo y el periodo de pago de la cuota
+        //agregar el campo periodo en el model
 
         if ($this->request->isPost) {
+
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'cuota_id' => $model->cuota_id,]);
                 $this->setMensaje('success', "Generado con Exito.");

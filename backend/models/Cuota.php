@@ -72,7 +72,7 @@ class Cuota extends CommandsMyActiveRecord
             'fecha' => 'Fecha',
             'vencimiento' => 'Vencimiento',
             'total' => 'Total',
-            'alumno_id' => 'Alumno ID',
+            'alumno_id' => 'Alumno',
             'observacion' => 'Observacion',
             'estado' => 'Estado',
             'created_at' => 'Created At',

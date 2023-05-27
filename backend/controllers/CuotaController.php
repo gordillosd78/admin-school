@@ -3,10 +3,13 @@
 namespace backend\controllers;
 
 use app\models\Alumno;
+use app\models\Concepto;
 use Yii;
 use app\models\Cuota;
 use app\models\search\CuotaSearch;
 use backend\controllers\CommonController;
+use PSpell\Config;
+use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -25,15 +28,17 @@ class CuotaController extends CommonController
         $searchModel = new CuotaSearch();
         $request = Yii::$app->request;
 
-        $components[] = ['type' => 'date', 'htmlClass' => 'w-25', 'name' => 'fechaDesde', 'placeholder' => 'Fecha Desde'];
-        $components[] = ['type' => 'date', 'htmlClass' => 'w-25', 'name' => 'fechaHasta', 'placeholder' => 'Fecha Hasta'];
-        $components[] = ['type' => 'select2', 'htmlClass' => 'w-25', 'name' => 'estado', 'placeholder' => 'Seleccione Estado', 'list' => Cuota::getEstado()];
+        $components[] = ['type' => 'date', 'htmlClass' => 'col-md-2', 'name' => 'fechaDesde', 'placeholder' => 'Fecha Desde'];
+        $components[] = ['type' => 'date', 'htmlClass' => 'col-md-2', 'name' => 'fechaHasta', 'placeholder' => 'Fecha Hasta'];
+        $components[] = ['type' => 'select2', 'htmlClass' => 'col-md-2', 'name' => 'alumno_id', 'placeholder' => 'Seleccione Alumno', 'list' => Alumno::getArrayAlumno()];
+        $components[] = ['type' => 'select2', 'htmlClass' => 'col-md-2', 'name' => 'estado', 'placeholder' => 'Seleccione Estado', 'list' => Cuota::getEstado()];
         $components[] = ['type' => 'number', 'htmlClass' => 'col-md-2', 'name' => 'rows', 'placeholder' => 'Registros', 'min' => '0', 'max' => '80'];
 
         if ($request->post())
             $this->session->set('CuotaSearch', $request->post('CuotaSearch'));
 
         if ($this->session->get('CuotaSearch')) {
+            $searchModel->alumno_id = $this->session->get('CuotaSearch')['alumno_id'];
             $searchModel->fechaDesde = $this->session->get('CuotaSearch')['fechaDesde'];
             $searchModel->fechaHasta = $this->session->get('CuotaSearch')['fechaHasta'];
             $searchModel->estado = $this->session->get('CuotaSearch')['estado'];
@@ -43,6 +48,8 @@ class CuotaController extends CommonController
         $dataProvider = $searchModel->search();
 
         $this->items = $this->getAdvancedMenu($this->items, 'tasks', 'Cuota', 'cuota/index');
+        $this->items = $this->getAdvancedMenu($this->items, 'copyright', 'Inscripcion', 'inscripcion/index');
+        $this->items = $this->getAdvancedMenu($this->items, 'tasks', 'Alumno', 'alumno/index');
         //$this->items = $this->getAdvancedMenu($this->items, 'copyright', 'Compras', 'compra/index');
         //$this->items = $this->getAdvancedMenu($this->items, 'bars', 'Procesar', 'procesoreceta/index');
         //$this->items = $this->getAdvancedMenu($this->items, 'retweet', 'Movimientos', 'movimiento/index')
@@ -160,5 +167,90 @@ class CuotaController extends CommonController
         } else {
             throw new NotFoundHttpException('El registro requerido no existe.');
         }
+    }
+
+    /**
+     * Calcula fecha de vencimiento de la cuota segun el periodo del concepto de pago
+     * @param integer $periodo indica el periodo en el que se debe realizar el pago 
+     * @param string $fecha fecha que se debe emite el comprobante para el pago
+     * @return string fecha de vencimiento
+     */
+    public function initVencimiento($periodo, $fecha)
+    {
+        $timestamp = strtotime($fecha);
+        switch ($periodo) {
+            case '1':
+                $vencimiento = $fecha;
+                break;
+            case '2': //Mensual día 10
+                $dia = date('d', $timestamp);
+                $fecha_actual = '10-' . date("m", $timestamp) . '-' . date("Y", $timestamp);
+                if ($dia > '10')
+                    $vencimiento = date("d-m-Y", strtotime($fecha_actual . "+ 1 month"));
+                else
+                    $vencimiento = $fecha_actual;
+                break;
+            case '7': //sumo 1 semana
+                $dia = date('l', $timestamp);
+                $condition = 'saturday';
+                if ($dia === 'Saturday')
+                    $condition = 'saturday next week';
+                $vencimiento = date("d-m-Y", strtotime($condition, $timestamp));
+                break;
+            case '15': // Quincenal                
+                $dia = date('d', $timestamp);
+                $mes = date('m', $timestamp);
+                if ($dia <= '15')
+                    $vencimiento = date("16-m-Y", strtotime("16-" . $mes . '-' . date("Y")));
+                else
+                    $vencimiento = date("01-m-Y", strtotime($fecha . "+ 1 month"));
+                break;
+            case '171': //suma 7 días
+                $vencimiento = date("d-m-Y", strtotime($fecha . " + 7 days"));
+                break;
+            case '120': //suma 20 días
+                $vencimiento = date("d-m-Y", strtotime($fecha . " + 20 days"));
+                break;
+            case '30': //Siguiente Mes
+                $fecha_actual = '01-' . date("m", $timestamp) . '-' . date("Y", $timestamp);
+                $vencimiento = date("d-m-Y", strtotime($fecha_actual . "+ 1 month"));
+                break;
+            case '301': //Mensual día 15
+                $dia = date('d', $timestamp);
+                $fecha_actual = '15-' . date("m", $timestamp) . '-' . date("Y", $timestamp);
+                if ($dia > '15')
+                    $vencimiento = date("d-m-Y", strtotime($fecha_actual . "+ 1 month"));
+                else
+                    $vencimiento = $fecha_actual;
+                break;
+            case '151': //sumo 15 dias
+                $date = date_create($fecha);
+                date_add($date, date_interval_create_from_date_string('15 days'));
+                $vencimiento = date_format($date, 'd-m-Y');
+                break;
+            default:
+                $vencimiento = date('d-m-Y');
+                break;
+        }
+        return $vencimiento;
+    }
+
+    public function actionVencimiento($conceptoId, $fecha)
+    {
+        $modelConcepto = Concepto::findOne($conceptoId);
+        $value['periodo'] = Concepto::getArrayPeriodo($modelConcepto->periodo);
+        $value['vencimiento'] = $this->initVencimiento($modelConcepto->periodo, $fecha);
+
+        return Json::encode($value);
+    }
+
+    /**
+     * Delete session variables created for search
+     */
+    public function actionReset()
+    {
+        if (isset($this->session['CompraSearch'])) unset($this->session['CompraSearch']);
+
+        return $this->redirect(['index']);
     }
 }

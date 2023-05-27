@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Concepto;
 use app\models\Cuota;
 use yii\helpers\Html;
 use kartik\grid\GridView;
@@ -23,11 +24,7 @@ $this->title =  ' Administrar Detalle Cuota';
             'pageSummary' => 'Totales',
             'pageSummaryOptions' => ['colspan' => 2],
         ],
-        [
-            'attribute' => 'cantidad',
-            'vAlign' => 'middle',
-            'hAlign' => 'middle',
-        ],
+
         [
             'attribute' => 'concepto_id',
             'value' => function ($model) {
@@ -39,8 +36,21 @@ $this->title =  ' Administrar Detalle Cuota';
         [
             'attribute' => 'periodo',
             'value' => function ($model) {
-                return $model->getMes($model->periodo);
+                return Concepto::getArrayPeriodo($model->periodo);
             },
+            'vAlign' => 'middle',
+            'hAlign' => 'middle',
+        ],
+        [
+            'attribute' => 'vencimiento',
+            'value' => function ($model) {
+                return $model->getFecha($model->vencimiento);
+            },
+            'vAlign' => 'middle',
+            'hAlign' => 'middle',
+        ],
+        [
+            'attribute' => 'observacion',
             'vAlign' => 'middle',
             'hAlign' => 'middle',
         ],
@@ -61,11 +71,6 @@ $this->title =  ' Administrar Detalle Cuota';
             'hAlign' => 'right',
         ],
         [
-            'attribute' => 'observacion',
-            'vAlign' => 'middle',
-            'hAlign' => 'middle',
-        ],
-        [
             'class' => 'yii\grid\ActionColumn',
             'template' => '{delete}',
             'buttons' => [
@@ -82,6 +87,7 @@ $this->title =  ' Administrar Detalle Cuota';
                         );
                 }
             ],
+            'header' => 'Acciones'
         ],
     ];
     ?>

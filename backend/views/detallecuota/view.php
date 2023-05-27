@@ -33,7 +33,6 @@ $this->title = ' Detalle de Cuota Nro: ' . $model->cuota_id; ?>
         <?= $this->render('_form', [
             'model' => $model,
             'listadoConceptos' => $listadoConceptos,
-            'listadoPeriodos' => $listadoPeriodos
         ]) ?>
     </div>
 

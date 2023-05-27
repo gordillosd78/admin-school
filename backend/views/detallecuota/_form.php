@@ -4,11 +4,14 @@ use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FontAwesome;
 use kartik\form\ActiveForm;
 
+
 /* @var $this yii\web\View */
 /* @var $model app\models\DetalleCuota */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 <div class="col-md-12">
+	<?php $fecha = $model->getFecha($model->cuota->fecha); //Usamos la fecha en el JQuery 
+	?>
 	<div class="row detalle-cuota-form bg-light p-4">
 		<div class="col-md-9">
 
@@ -29,22 +32,19 @@ use kartik\form\ActiveForm;
 			</div>
 
 			<div class="col-md-3">
-				<?= $form->field($model, 'periodo')->dropDownList(
-					$listadoPeriodos,
-					[
-						'prompt' => 'Seleccione un Periodo de pago...',
-						'id' => 'periodo_id',
-						'disabled' => false
+				<?= $form->field($model, 'periodo', [
+					'inputOptions' => [
+						'placeholder' => $model->getAttributeLabel('periodo'),
 					]
-				) ?>
+				])->textInput(['disabled' => true, 'id' => 'periodo'])  ?>
 			</div>
 
 			<div class="col-md-3">
-				<?= $form->field($model, 'cantidad', [
+				<?= $form->field($model, 'vencimiento', [
 					'inputOptions' => [
-						'placeholder' => $model->getAttributeLabel('cantidad'),
+						'placeholder' => $model->getAttributeLabel('vencimiento'),
 					]
-				])->textInput(['type' => 'number', 'min' => 0, 'disabled' => false, 'id' => 'cantidad_id']) ?>
+				])->textInput(['disabled' => true, 'id' => 'vencimiento']) ?>
 			</div>
 
 			<div class="col-md-6">
@@ -71,3 +71,33 @@ use kartik\form\ActiveForm;
 		<?php ActiveForm::end(); ?>		
 	</div>
 </div>
+<?php
+$script = <<< JS
+//Aqui va el codigo JQuery
+// $('#concepto_id').change(function () { 
+// 	var conceptoId =$('#concepto_id').val();
+// 	console.log(conceptoId);	
+// 	$.get('index.php?r=concepto/listperiodo',{conceptoId:conceptoId},function(data){
+//         $('#periodo_id').html(data);
+// 		console.log(data);
+//         $('#periodo_id').attr('disabled',false);
+        
+//     });
+// });
+
+$("#concepto_id").change(function(){
+    var conceptoId = $('#concepto_id').val(); 
+    var fecha = "{$fecha}";//pasamos el valor de la variable desde php a JQuery
+
+    $.get('index.php?r=cuota/vencimiento', {conceptoId:conceptoId,fecha:fecha}, function(data){
+         if (data){
+             const value = (data) ? $.parseJSON(data) : '';          
+             $('#periodo').attr('value', value.periodo);
+             $('#vencimiento').attr('value', value.vencimiento);
+         }        
+     });       
+ });
+
+JS;
+$this->registerJs($script);
+?>
