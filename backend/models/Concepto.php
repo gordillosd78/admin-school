@@ -12,6 +12,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $id
  * @property string $nombre
+ * @property integer $periodo
  * @property double $monto
  * @property string $observacion
  * @property integer $estado
@@ -25,6 +26,14 @@ use yii\helpers\ArrayHelper;
  */
 class Concepto extends MyActiveRecord
 {
+    const MATRICULA = '2';
+    const CUOTA = '3';
+    const SEGURO_ESCOLAR = '4';
+    const PAGO_UNICO = '13';
+
+    public static $periodoPago = array('1' => 'Enero', '2' => 'Febrero', '3' => 'Marzo', '4' => 'Abril', '5' => 'Mayo', '6' => 'Junio', '7' => 'Julio', '8' => 'Agosto', '9' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre', '13' => 'Pago Unico');
+    public static $periodo = array('1' => 'No Definido', '2' => 'Mensual', '3' => 'Pago Unico');
+
     /**
      * @inheritdoc
      */
@@ -33,7 +42,6 @@ class Concepto extends MyActiveRecord
         return 'concepto';
     }
 
-
     /**
      * @inheritdoc
      */
@@ -41,7 +49,7 @@ class Concepto extends MyActiveRecord
     {
         return [
             [['monto'], 'number'],
-            [['estado', 'created_by', 'updated_by'], 'integer'],
+            [['estado', 'periodo', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['nombre'], 'string', 'max' => 45],
             [['observacion'], 'string', 'max' => 250],
@@ -59,6 +67,7 @@ class Concepto extends MyActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
+            'periodo' => 'Periodo',
             'monto' => 'Monto',
             'observacion' => 'Observacion',
             'estado' => 'Estado',
@@ -103,5 +112,12 @@ class Concepto extends MyActiveRecord
     public static function getArrayConcepto($order = 'nombre')
     {
         return ArrayHelper::map(self::find()->orderBy($order)->active()->asArray()->all(), 'id', 'nombre');
+    }
+
+    public static function getArrayPeriodo($key = null)
+    {
+        if ($key !== null)
+            return self::$periodo[$key];
+        return self::$periodo;
     }
 }

@@ -32,6 +32,10 @@ $this->title = ' Concepto: ' . $model->id;
             'attributes' => [
                 'id',
                 'nombre',
+                [
+                    'attribute' => 'periodo',
+                    'value' => $model->getArrayPeriodo($model->periodo),
+                ],
                 'monto',
                 'observacion',
                 [

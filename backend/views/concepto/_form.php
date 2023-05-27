@@ -18,6 +18,8 @@ use kartik\form\ActiveForm;
 
 		<?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
+		<?= $form->field($model, 'periodo')->dropDownList($model->getArrayPeriodo()) ?>
+
 		<?= $form->field($model, 'monto')->textInput() ?>
 
 		<?= $form->field($model, 'observacion')->textarea(['maxlength' => true]) ?>

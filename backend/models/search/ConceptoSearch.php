@@ -18,7 +18,7 @@ class ConceptoSearch extends Concepto
     public function rules()
     {
         return [
-            [['id', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'estado', 'periodo', 'created_by', 'updated_by'], 'integer'],
             [['nombre', 'observacion', 'created_at', 'updated_at'], 'safe'],
             [['monto'], 'number'],
         ];
@@ -63,6 +63,7 @@ class ConceptoSearch extends Concepto
             'id' => $this->id,
             'monto' => $this->monto,
             'estado' => $this->estado,
+            'periodo' => $this->periodo,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,

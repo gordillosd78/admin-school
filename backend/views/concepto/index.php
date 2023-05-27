@@ -30,6 +30,12 @@ $this->title =  ' Administrar Concepto';
         'columns' => [
             'id',
             'nombre',
+            [
+                'attribute' => 'periodo',
+                'value' => function ($model) {
+                    return $model->getArrayPeriodo($model->periodo);
+                }
+            ],
             'monto',
             'observacion',
             [

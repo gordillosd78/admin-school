@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\Concepto;
+use app\models\Cuota;
 use app\models\search\ConceptoSearch;
 use backend\controllers\CommonController;
 use yii\web\NotFoundHttpException;
@@ -122,6 +123,23 @@ class ConceptoController extends CommonController
             return $model;
         } else {
             throw new NotFoundHttpException('El registro requerido no existe.');
+        }
+    }
+
+
+    public function actionListperiodo($conceptoId)
+    {
+        if ($conceptoId === Concepto::CUOTA) {
+            $meses = Cuota::$meses;
+            // echo "<option value = '1'>No Definido</option>";
+            if (count($meses) > 0) {
+                foreach ($meses as $key => $value) {
+
+                    echo "<option value = '" . $key . "'>" . $value . "</option>";
+                }
+            }
+        } elseif ($conceptoId === Concepto::SEGURO_ESCOLAR || $conceptoId === Concepto::MATRICULA) {
+            echo "<option value = '" . Concepto::PAGO_UNICO . "'>Pago Unico</option>";
         }
     }
 }
