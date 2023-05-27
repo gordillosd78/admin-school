@@ -20,6 +20,10 @@ class m230429_230927_add_fecha_nacimiento_column_to_alumno_table extends Migrati
      */
     public function safeDown()
     {
-        $this->dropColumn('{{%alumno}}', 'fecha_nacimiento');
+        try {
+            $this->dropColumn('{{%alumno}}', 'fecha_nacimiento');
+        } catch (PDOException $e) {
+            echo "Error: " . $e;
+        }
     }
 }

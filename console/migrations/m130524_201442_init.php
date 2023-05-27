@@ -15,8 +15,8 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull()->unique(),
-            'auth_key' => $this->string(32)->notNull(),
-            'password_hash' => $this->string()->notNull(),
+            'auth_key' => $this->string(32)->notNull()->defaultValue(0),
+            'password_hash' => $this->string()->notNull()->defaultValue(0),
             'password_reset_token' => $this->string()->unique(),
             'email' => $this->string()->notNull()->unique(),
 
@@ -24,6 +24,16 @@ class m130524_201442_init extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        $this->insert('{{%user}}', [
+
+            'id' => 1,
+            'username' => 'NoDefinido',
+            'email' => 'email@email.com',
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d')
+
+        ]);
     }
 
     public function down()

@@ -9,11 +9,11 @@ use yii\bootstrap5\Html;
 
 $this->title = 'Login';
 ?>
-<div class="site-login">
-    <div class="mt-5 offset-lg-3 col-lg-6">
+<div class="d-flex flex-column justify-content-center align-items-center site-login">
+    <div class="col-md-4 p-2 shadow p-4 mb-5 bg-body rounded border d-flex flex-column ">
         <h1><?= Html::encode($this->title) ?></h1>
 
-        <p>Please fill out the following fields to login:</p>
+        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
@@ -23,8 +23,8 @@ $this->title = 'Login';
 
         <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
-        <div class="form-group">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
+        <div class="form-group d-flex justify-content-center">
+            <?= Html::submitButton('Login', ['class' => 'w-50 btn btn-primary btn-lg btn-block', 'name' => 'login-button']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

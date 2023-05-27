@@ -32,11 +32,15 @@ class m230426_001820_add_new_roles_sistemas_preceptor_docente extends Migration
      */
     public function safeDown()
     {
-        $auth = Yii::$app->authManager;
-        $auth->remove('admin');
-        $auth->remove('sistemas');
-        $auth->remove('preceptor');
-        $auth->remove('docente');
+        $db = Yii::$app->db;
+        $db->createCommand('
+        
+        DELETE FROM `auth_item` WHERE `auth_item`.`name` = "admin";
+        DELETE FROM `auth_item` WHERE `auth_item`.`name` = "docente";
+        DELETE FROM `auth_item` WHERE `auth_item`.`name` = "sistemas";
+        DELETE FROM `auth_item` WHERE `auth_item`.`name` = "preceptor";
+        
+        ')->execute();
     }
 
     /*

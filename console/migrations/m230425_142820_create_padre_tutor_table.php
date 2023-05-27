@@ -23,10 +23,10 @@ class m230425_142820_create_padre_tutor_table extends Migration
                 'fecha_nacimiento' => $this->dateTime(),
                 'observacion' => $this->string(250),
                 'estado' => $this->integer()->defaultValue(0),
-                'created_at' => $this->dateTime(),
+                'created_at' => $this->dateTime()->notNull(),
                 'updated_at' => $this->dateTime(),
-                'created_by' => $this->integer()->defaultValue(1),
-                'updated_by' => $this->integer()->defaultValue(1),
+                'created_by' => $this->integer()->notNull(),
+                'updated_by' => $this->integer(),
             ]);
 
             // creates index for column `created_by`
@@ -74,7 +74,8 @@ class m230425_142820_create_padre_tutor_table extends Migration
                 'observacion' => 'Para uso interno del sistema',
                 'estado' => '0',
                 'created_at' => date('Y-m-d'),
-                'created_by' => '1'
+                'created_by' => '1',
+
             ]);
         } catch (\yii\db\Exception $ex) {
             echo " Problema para ejecutar migration -> " . $ex->getMessage();

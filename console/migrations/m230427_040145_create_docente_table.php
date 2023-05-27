@@ -47,7 +47,9 @@ class m230427_040145_create_docente_table extends Migration
             'created_by',
             '{{%user}}',
             'id',
-            'CASCADE'
+            'CASCADE',
+            'NO ACTION',
+            'NO ACTION'
         );
 
         // creates index for column `updated_by`
@@ -64,7 +66,9 @@ class m230427_040145_create_docente_table extends Migration
             'updated_by',
             '{{%user}}',
             'id',
-            'CASCADE'
+            'CASCADE',
+            'NO ACTION',
+            'NO ACTION'
         );
         try {
             $this->insert('{{%docente}}', [
