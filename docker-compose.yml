@@ -1,34 +1,59 @@
 version: '3.2'
 
 services:
+  backend:
+    build: ./docker
+    image: admin-school-backend
+    container_name: backend
+    ports:
+      - 8080:80  
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/var/www/admin-school 
+    networks:
+       - my-network 
 
   frontend:
-    build: frontend
+    build: ./docker
+    image: admin-school-frontend
+    container_name: frontend
     ports:
-      - 20080:80
+      - 8081:80
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
-      - ./:/app
-
-  backend:
-    build: backend
+      - ./:/var/www/admin-school
+      - ./docker/mysql-config.cnf:/etc/mysql/conf.d/config.cnf
+    networks:
+       - my-network 
+         
+  dbyii2:
+    build: ./docker/mysql          
+    container_name: mysql-container
+    restart: always    
     ports:
-      - 21080:80
+      - 23306:3306
+    environment:    
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: admin-school
+        MYSQL_USER: admin-school
+        MYSQL_PASSWORD: admin-school   
     volumes:
-      # Re-use local composer cache via host-volume
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
+       - ./my-db:/var/lib/mysql:rw
+    networks:
+       - my-network              
+volumes:
+  my-db: {}
+networks:
+  my-network:
+    name: mysql_net
+    driver: bridge
 
-  mysql:
-    image: mysql:5.7
-    environment:
-      - MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=yii2advanced
-      - MYSQL_USER=yii2advanced
-      - MYSQL_PASSWORD=secret
+
+ 
 
   #pgsql:
   #  image: postgres:9.5
