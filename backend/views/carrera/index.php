@@ -33,7 +33,13 @@ $this->title =  ' Administrar Carrera';
             'descripcion',
             'resolucion',
             'duracion',
-            // 'estado',
+            [
+                'attribute' => 'estado',
+                'value' => function ($model) {
+                    return $model->getEstado($model->estado);
+                }
+            ],
+
             // 'observacion',
             // 'created_at',
             // 'updated_at',
