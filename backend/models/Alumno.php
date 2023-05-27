@@ -35,6 +35,12 @@ use yii\helpers\ArrayHelper;
  */
 class Alumno extends MyActiveRecord
 {
+    const REGULAR = '2';
+    const LIBRE = '12';
+    const EGRESADO = '100';
+    const NO_DEFINIDO = '3';
+
+    public static $estado = ['0' => 'Inactivo', '1' => 'Activo', '2' => 'Regular', '3' => 'No Definido', '12' => 'Libre', '100' => 'Egresado'];
     /**
      * @inheritdoc
      */
@@ -132,6 +138,18 @@ class Alumno extends MyActiveRecord
     public static function find()
     {
         return new \app\models\query\AlumnoQuery(get_called_class());
+    }
+
+    /**
+     * Retorna array clave valor (estado => descripcion)
+     * @params @integer valor del indice del array
+     * @return @array
+     */
+    public static function getEstado($key = null)
+    {
+        if ($key !== null)
+            return self::$estado[$key];
+        return self::$estado;
     }
 
     /**

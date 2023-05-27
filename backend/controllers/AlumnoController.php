@@ -21,11 +21,13 @@ class AlumnoController extends CommonController
     {
         $searchModel = new AlumnoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $items = $this->addItems($this->getMenu(), 'barcode', 'Cuota', 'cuota/index');
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'items' => $this->getMenu()
+            'items' => $items
         ]);
     }
 
@@ -37,6 +39,7 @@ class AlumnoController extends CommonController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        $model->fecha_nacimiento = $model->getFecha($model->fecha_nacimiento);
         $model->created_at = $model->getFecha($model->created_at);
         $model->updated_at = $model->getFecha($model->updated_at);
 
@@ -53,6 +56,8 @@ class AlumnoController extends CommonController
      */
     public function actionCreate()
     {
+        $items = $this->addItems($this->getMenu(), 'barcode', 'Padre-Tutor', 'padretutor/index');
+
         $model = new Alumno();
         $apellidosNombres = PadreTutor::getArrayNombreApellidoTutor();
         $listaPadreTutor = [];
@@ -64,12 +69,15 @@ class AlumnoController extends CommonController
         $listaCarrera = Carrera::getArrayCarrera();
 
         if ($this->request->isPost) {
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post())) {
+                $model->fecha_nacimiento = $model->setFecha($model->fecha_nacimiento);
+                if ($model->save()) {
+                    $this->setMensaje('success', "Generado con Exito.");
+                } else
+                    $this->setMensaje('error', "No se pudo crear el Alumno!!!");
                 return $this->redirect(['view', 'id' => $model->id]);
-                $this->setMensaje('success', "Generado con Exito.");
             }
         } else {
-
             $model->loadDefaultValues();
         }
 
@@ -77,7 +85,7 @@ class AlumnoController extends CommonController
             'model' => $model,
             'listaCarrera' => $listaCarrera,
             'listaPadreTutor' => $listaPadreTutor,
-            'items' => $this->getMenu()
+            'items' => $items
         ]);
     }
 

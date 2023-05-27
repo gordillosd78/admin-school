@@ -43,7 +43,6 @@ $this->title =  ' Administrar Alumno';
                     return $model->padreTutor->apellido . ' ' . $model->padreTutor->nombre;
                 }
             ],
-
             // 'observacion',
             [
                 'attribute' => 'estado',
