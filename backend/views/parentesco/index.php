@@ -29,7 +29,10 @@ $this->title =  ' Administrar Parentesco';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'id',
+            [
+                'attribute' => 'id',
+                'header' => '#',
+            ],
             'nombre',
             'observacion',
             [
@@ -38,7 +41,7 @@ $this->title =  ' Administrar Parentesco';
                     return $model->getEstado($model->estado);
                 }
             ],
-            'created_at',
+            //'created_at',
             // 'updated_at',
             // 'created_by',
             // 'updated_by',

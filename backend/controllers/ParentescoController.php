@@ -18,6 +18,7 @@ class ParentescoController extends CommonController
     public function actionIndex()
     {
         $searchModel = new ParentescoSearch();
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -34,8 +35,11 @@ class ParentescoController extends CommonController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $model->created_at  = $model->getFecha($model->created_at);
+        $model->updated_at  = $model->getFecha($model->updated_at);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
             'items' => $this->getMenu()
         ]);
     }
