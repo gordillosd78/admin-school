@@ -5,26 +5,31 @@ use kartik\form\ActiveForm; // or kartik\widgets\ActiveForm
 use rmrevin\yii\fontawesome\FAS;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
+use rmrevin\yii\fontawesome\FontAwesome;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\LineaTesoreria */
 /* @var $form yii\bootstrap\ActiveForm */
 
 ?>
-<div class="d-flex flex-column">
-    <div class="panel-heading">
+<div class="panel panel-default border p-2">
+    <div class="panel-heading border-bottom">
         <h4 class="panel-title"><?= $title ?></h4>
     </div>
-    <div class="panel-body d-flex flex-column">
-        <div class="form-group">
-            <div class="d-flex w-90">
+    <div class="panel-body mt-3">
+        <div class="form-group row">
+            <div class="col-md-10 d-flex flex-row">
                 <?php
                 if (isset($components) && count($components) > 0) {
                     $form = ActiveForm::begin([
-                        'formConfig' => ['deviceSize' => ActiveForm::SIZE_SMALL, 'autocomplete' => 'off']
+                        'type' => ActiveForm::TYPE_INLINE,
+                        'formConfig' => ['deviceSize' => ActiveForm::SIZE_SMALL, 'autocomplete' => 'off'],
+                        'options' => [
+                            'class' => ['d-flex'],
+                        ]
                     ]);
                     foreach ($components as $key => $items) {
-                        $options = ['class' =>   [$items['htmlClass']]];
+                        $options = ['class' => [$items['htmlClass']]];
                         switch ($items['type']) {
                             case 'date':
                                 echo Html::beginTag('div', $options);
@@ -80,10 +85,10 @@ use kartik\select2\Select2;
                     echo 'FORMULARIO DE GRUPO';
                 ?>
             </div>
-            <div class="d-flex flex-column w-40">
-                <?= Html::a(FAS::icon('bars') . ' Nuevo', [$this->context->id . '/create'], ['class' => 'btn btn-success btn-block']) ?>
-                <?= Html::submitButton(FAS::icon('search') . ' Buscar', ['class' => 'btn btn-primary btn-block']) ?>
-                <?= Html::a(FAS::icon('refresh') . ' Limpiar', ['reset'], ['class' => 'btn btn-warning btn-block']) ?>
+            <div class="d-flex flex-column gap-1 col-md-2">
+                <?= Html::a(FAS::icon('bars') . ' Nuevo', [$this->context->id . '/create'], ['class' => 'btn btn-success btn-sm']) ?>
+                <?= Html::submitButton(FAS::icon('search') . ' Buscar', ['class' => 'btn btn-primary btn-sm']) ?>
+                <?= Html::a(FAS::icon('broom') . ' Limpiar', ['reset'], ['class' => 'btn btn-warning btn-sm']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

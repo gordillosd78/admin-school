@@ -5,7 +5,7 @@ use rmrevin\yii\fontawesome\FontAwesome;
 use yii\helpers\Html;
 
 $this->beginContent('@app/views/layouts/main.php'); ?>
-<div class="d-flex flex-row">
+<div class="row">
     <div class="col-md-9">
         <?= $content; ?>
     </div>

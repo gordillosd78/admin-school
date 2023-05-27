@@ -40,8 +40,6 @@ AppAsset::register($this);
             $second_items = $session->get('second_items');
         $second_options[] = '';
 
-
-
         NavBar::begin([
             'brandLabel' => Yii::$app->name,
             'brandUrl' => Yii::$app->homeUrl,
@@ -72,7 +70,7 @@ AppAsset::register($this);
         } else {
             echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Cerrar Sesión (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout text-decoration-none']
                 )
                 . Html::endForm();

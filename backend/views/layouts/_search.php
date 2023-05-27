@@ -2,9 +2,9 @@
 
 use yii\helpers\Html;
 use kartik\form\ActiveForm; // or kartik\widgets\ActiveForm
-use rmrevin\yii\fontawesome\FA;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
+use rmrevin\yii\fontawesome\FontAwesome;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\LineaTesoreria */
@@ -16,7 +16,7 @@ $form = ActiveForm::begin([
 
 ]);
 ?>
-<div class="panel panel-default">
+<div class="panel panel-default d-flex flex-column w-40">
     <div class="panel-heading">
         <h4><?= $title ?></h4>
     </div>
@@ -101,9 +101,9 @@ $form = ActiveForm::begin([
                 </div>
             </div>
             <div class="col-md-6">
-                <?= Html::a(FA::icon('bars') . ' Nuevo', [$this->context->id . '/create'], ['class' => 'btn btn-success']) ?>
-                <?= Html::submitButton(FA::icon('search') . ' Buscar', ['class' => 'btn btn-primary']) ?>
-                <?= Html::a(FA::icon('refresh') . ' Limpiar', ['reset'], ['class' => 'btn btn-warning']) ?>
+                <?= Html::a(FontAwesome::icon('bars') . ' Nuevo', [$this->context->id . '/create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::submitButton(FontAwesome::icon('search') . ' Buscar', ['class' => 'btn btn-primary']) ?>
+                <?= Html::a(FontAwesome::icon('refresh') . ' Limpiar', ['reset'], ['class' => 'btn btn-warning']) ?>
             </div>
         </div>
     </div>
