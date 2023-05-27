@@ -17,7 +17,7 @@ class LoginForm extends Model
     private $_user;
 
     public $tipos = ['tipoempleado', 'tipoespacio'];
-    public $procesos = ['inscripcion'];
+    public $procesos = ['inscripcion', 'cuota'];
 
 
     /**
