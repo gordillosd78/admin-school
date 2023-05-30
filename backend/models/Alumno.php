@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\query\AlumnoQuery;
 use Yii;
 use common\models\MyActiveRecord;
 use common\models\User;
@@ -160,6 +161,6 @@ class Alumno extends MyActiveRecord
      */
     public static function getArrayAlumno($order = 'nombre')
     {
-        return ArrayHelper::map(self::find()->orderBy($order)->active()->asArray()->all(), 'id', 'nombre');
+        return ArrayHelper::map(self::find()->byFullName()->orderBy($order)->active()->asArray()->all(), 'id', 'full_name');
     }
 }

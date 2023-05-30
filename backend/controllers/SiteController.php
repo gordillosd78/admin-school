@@ -101,8 +101,8 @@ class SiteController extends Controller
                         //  $DropDownSistemaItems[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
                         if (in_array($child_item->name, $model->procesos)) // -- Menu procesos
                             $DropDownProcesosItems[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
-                        // elseif (in_array($child_item->name, $model->admin)) // -- Menu Administrar
-                        //   $DropDownAdminItems[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
+                        elseif (in_array($child_item->name, $model->admin)) // -- Menu Administrar
+                            $DropDownAdminItems[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
                         // elseif (in_array($child_item->name, $model->tipos)) // -- Menu Tipos
                         //   $DropDownTiposAdmin[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
                         // elseif (in_array($child_item->name, $model->articulos)) // -- Menu Articulos
@@ -117,8 +117,8 @@ class SiteController extends Controller
                 //  $DropDownAdminItems[] = $this->setMenuByArray($DropDownArticulos, 'boxes', 'Articulos');
                 //if (isset($DropDownTiposAdmin))
                 //  $DropDownAdminItems[] = $this->setMenuByArray($DropDownTiposAdmin, 'database', 'Tipos');
-                // if (isset($DropDownAdminItems))
-                //   $items[] = $this->setMenuByArray($DropDownAdminItems, 'cogs', 'Administrar');
+                if (isset($DropDownAdminItems))
+                    $items[] = $this->setMenuByArray($DropDownAdminItems, 'cogs', 'Administrar');
                 //if (isset($DropDownSistemaItems))
                 //  $items[] = $this->setMenuByArray($DropDownSistemaItems, 'bars', 'Sistema');
 
