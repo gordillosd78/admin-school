@@ -97,35 +97,34 @@ class SiteController extends Controller
                         if (strpos($child_item->description, ","))
                             list($icono, $descripcion) = explode(",", $child_item->description);
 
-                        //if (in_array($child_item->name, $model->sistema)) // -- Menu sistema
-                        //  $DropDownSistemaItems[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
-                        if (in_array($child_item->name, $model->procesos)) // -- Menu procesos
+                        if (in_array($child_item->name, $model->alumnos)) // -- Menu Gestion Alumnos
+                            $DropDownGestionAlumnosItems[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
+                        elseif (in_array($child_item->name, $model->procesos)) // -- Menu procesos
                             $DropDownProcesosItems[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
                         elseif (in_array($child_item->name, $model->admin)) // -- Menu Administrar
                             $DropDownAdminItems[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
-                        // elseif (in_array($child_item->name, $model->tipos)) // -- Menu Tipos
-                        //   $DropDownTiposAdmin[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
+                        elseif (in_array($child_item->name, $model->tipos)) // -- Menu Tipos
+                            $DropDownTiposAdmin[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
                         // elseif (in_array($child_item->name, $model->articulos)) // -- Menu Articulos
                         //   $DropDownArticulos[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
                         else
                             $items[] = ['label' => FontAwesome::icon($icono) . ' ' . $descripcion, 'url' => [$child_item->name . "/index"]];
                     }
                 }
+                if (isset($DropDownGestionAlumnosItems))
+                    $items[] = $this->setMenuByArray($DropDownGestionAlumnosItems, 'bars', 'Gestion Alumnos');
                 if (isset($DropDownProcesosItems))
                     $items[] = $this->setMenuByArray($DropDownProcesosItems, 'database', 'Procesos');
                 //if (isset($DropDownArticulos))
                 //  $DropDownAdminItems[] = $this->setMenuByArray($DropDownArticulos, 'boxes', 'Articulos');
-                //if (isset($DropDownTiposAdmin))
-                //  $DropDownAdminItems[] = $this->setMenuByArray($DropDownTiposAdmin, 'database', 'Tipos');
+                if (isset($DropDownTiposAdmin))
+                    $DropDownAdminItems[] = $this->setMenuByArray($DropDownTiposAdmin, 'database', 'Tipos');
                 if (isset($DropDownAdminItems))
                     $items[] = $this->setMenuByArray($DropDownAdminItems, 'cogs', 'Administrar');
-                //if (isset($DropDownSistemaItems))
-                //  $items[] = $this->setMenuByArray($DropDownSistemaItems, 'bars', 'Sistema');
 
                 if ($session->isActive) {
                     $session->set('items', $items);
                 }
-
 
                 return $this->goBack();
             }

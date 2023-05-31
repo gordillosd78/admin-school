@@ -5,15 +5,16 @@
 /** @var \common\models\LoginForm $model */
 
 use kartik\form\ActiveForm;
+use rmrevin\yii\fontawesome\FontAwesome;
 use yii\bootstrap5\Html;
 
 $this->title = 'Login';
 ?>
 <div class="d-flex flex-column justify-content-center align-items-center site-login">
-    <div class="col-md-4 p-2 shadow p-4 mb-5 bg-body rounded border d-flex flex-column ">
-        <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-md-4 shadow-lg p-4 mb-5 bg-body rounded border d-flex flex-column ">
+        <h1><?= FontAwesome::icon('landmark')->size('xs') . ' ' . Html::encode($this->title) ?></h1>
 
-        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+        <h5 class="fw-normal mt-2 mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 

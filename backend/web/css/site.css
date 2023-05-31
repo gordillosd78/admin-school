@@ -40,6 +40,11 @@ a.desc:after {
     border-bottom-width: 0;
 }
 
+.container {
+    background-image:url(../img/en-pizarra.jpg);
+    background-size: contain;
+}
+
 .grid-view th,
 .grid-view td:last-child {
     white-space: nowrap;

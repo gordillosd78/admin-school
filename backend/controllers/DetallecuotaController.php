@@ -69,7 +69,8 @@ class DetallecuotaController extends CommonController
         //agregar el campo periodo en el model
 
         if ($this->request->isPost) {
-
+            var_dump(Yii::$app->request->post());
+            die();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'cuota_id' => $model->cuota_id,]);
                 $this->setMensaje('success', "Generado con Exito.");

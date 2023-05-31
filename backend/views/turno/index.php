@@ -38,10 +38,20 @@ $this->title =  ' Administrar Turno';
                     return $model->getEstado($model->estado);
                 }
             ],
-            'created_at',
+            //'created_at',
             // 'updated_at',
-            // 'created_by',
-            // 'updated_by',
+            [
+                'attribute' => 'created_by',
+                'value' => function ($model) {
+                    return $model->createdBy->username;
+                }
+            ],
+            [
+                'attribute' => 'updated_by',
+                'value' => function ($model) {
+                    return $model->updatedBy->username;
+                }
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}{update}',

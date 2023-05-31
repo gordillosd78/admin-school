@@ -16,7 +16,9 @@ class LoginForm extends Model
 
     private $_user;
 
+    public $admin = ['turno', 'curso', 'espacio'];
     public $tipos = ['tipoempleado', 'tipoespacio'];
+    public $alumnos = ['alumno', 'padretutor'];
     public $procesos = ['inscripcion', 'cuota'];
 
 

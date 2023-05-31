@@ -84,6 +84,8 @@ class PadretutorController extends CommonController
 
         $model = new PadreTutor();
         // $this->debugVariable(Yii::$app->request->post());
+        $listaParentesco = Parentesco::getArrayParentesco();
+        $listaTipoEmpleado = TipoEmpleado::getArrayTipoEmpleado();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
@@ -92,8 +94,7 @@ class PadretutorController extends CommonController
                     return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
-            $listaParentesco = Parentesco::getArrayParentesco();
-            $listaTipoEmpleado = TipoEmpleado::getArrayTipoEmpleado();
+
             $model->loadDefaultValues();
         }
 

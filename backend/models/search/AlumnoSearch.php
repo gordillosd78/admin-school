@@ -64,7 +64,7 @@ class AlumnoSearch extends Alumno
             'fecha_nacimiento' => $this->fecha_nacimiento,
             'carrera_id' => $this->carrera_id,
             'padre_tutor_id' => $this->padre_tutor_id,
-            'estado' => $this->estado,
+            'estado' => self::STATUS_ACTIVE,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,

@@ -22,11 +22,13 @@ class CursoController extends CommonController
     {
         $searchModel = new CursoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $items = $this->addItems($this->getMenu(), 'clock', 'Turno', 'turno/index');
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'items' => $this->getMenu()
+            'items' => $items
         ]);
     }
 

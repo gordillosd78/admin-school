@@ -60,7 +60,7 @@ class TurnoSearch extends Turno
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'estado' => $this->estado,
+            'estado' => self::STATUS_ACTIVE,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,
@@ -69,6 +69,7 @@ class TurnoSearch extends Turno
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
             ->andFilterWhere(['like', 'observacion', $this->observacion]);
+        $query->orderBy($this->nombre);
 
         return $dataProvider;
     }

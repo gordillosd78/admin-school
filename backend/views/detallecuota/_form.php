@@ -36,7 +36,7 @@ use kartik\form\ActiveForm;
 					'inputOptions' => [
 						'placeholder' => $model->getAttributeLabel('periodo'),
 					]
-				])->textInput(['disabled' => true, 'id' => 'periodo'])  ?>
+				])->textInput(['disabled' => false, 'id' => 'periodo'])  ?>
 			</div>
 
 			<div class="col-md-3">
@@ -44,7 +44,7 @@ use kartik\form\ActiveForm;
 					'inputOptions' => [
 						'placeholder' => $model->getAttributeLabel('vencimiento'),
 					]
-				])->textInput(['disabled' => true, 'id' => 'vencimiento']) ?>
+				])->textInput(['disabled' => false, 'id' => 'vencimiento']) ?>
 			</div>
 
 			<div class="col-md-6">

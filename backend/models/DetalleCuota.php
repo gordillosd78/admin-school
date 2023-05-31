@@ -50,7 +50,7 @@ class DetalleCuota extends MyActiveRecord
     {
         if ($this->isNewRecord) return null;
         if ($this->_subTotal === null)
-            $this->setSubTotal(($this->concepto->monto) * $this->cantidad);
+            $this->setSubTotal($this->concepto->monto);
         return $this->_subTotal;
     }
 
@@ -70,8 +70,9 @@ class DetalleCuota extends MyActiveRecord
     {
         return [
             [['interes'], 'number'],
-            [['periodo_pago', 'periodo', 'cuota_id', 'concepto_id', 'estado', 'created_by', 'updated_by'], 'integer'],
+            [['periodo_pago', 'cuota_id', 'concepto_id', 'estado', 'created_by', 'updated_by'], 'integer'],
             [['cuota_id', 'concepto_id'], 'required'],
+            [['periodo'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['observacion', 'vencimiento'], 'string', 'max' => 250],
             [['concepto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Concepto::class, 'targetAttribute' => ['concepto_id' => 'id']],

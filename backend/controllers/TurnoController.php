@@ -17,13 +17,16 @@ class TurnoController extends CommonController
 
     public function actionIndex()
     {
+
         $searchModel = new TurnoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $items = $this->addItems($this->getMenu(), 'chalkboard-teacher', 'Curso', 'curso/index');
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'items' => $this->getMenu()
+            'items' => $items
         ]);
     }
 

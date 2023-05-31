@@ -60,7 +60,7 @@ class CursoSearch extends Curso
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'estado' => $this->estado,
+            'estado' => self::STATUS_ACTIVE,
             'espacio_id' => $this->espacio_id,
             'turno_id' => $this->turno_id,
             'division_id' => $this->division_id,

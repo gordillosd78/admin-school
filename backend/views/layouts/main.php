@@ -5,9 +5,9 @@
 
 use backend\assets\AppAsset;
 use common\widgets\Alert;
+use kartik\nav\NavXBs5;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
 AppAsset::register($this);
@@ -41,11 +41,27 @@ AppAsset::register($this);
         $second_options[] = '';
 
         NavBar::begin([
-            'brandLabel' => Yii::$app->name,
+
+            'brandLabel' => Html::img(
+                    '@web/img/scholariship.png',
+                    [
+                        'class' => 'img-responsive',
+                        'alt' => Yii::$app->name,
+                        'style' => 'display:inline; 
+                                    vertical-align: top; 
+                                    height:22px;'
+                    ]
+                ),
             'brandUrl' => Yii::$app->homeUrl,
+
             'options' => [
                 'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+
             ],
+            'containerOptions' => [
+                'class' => 'd-flex justify-content-end'
+            ]
+
         ]);
         $menuItems = [
             ['label' => 'Home', 'url' => ['/site/index']],
@@ -59,14 +75,22 @@ AppAsset::register($this);
         // ]);
 
         if (!empty($items)) {
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
+            echo NavXBs5::widget([
+                'options' => ['class' => 'navbar-nav navbar-right'],
                 'encodeLabels' => false,
                 'items' => $items,
             ]);
         }
         if (Yii::$app->user->isGuest) {
-            echo Html::tag('div', Html::a('Login', ['/site/login'], ['class' => ['btn btn-link login text-decoration-none']]), ['class' => ['d-flex']]);
+            echo Html::tag(
+                'div',
+                Html::a(
+                    'Login',
+                    ['/site/login'],
+                    ['class' => ['btn btn-link login text-decoration-none']]
+                ),
+                ['class' => ['d-flex']]
+            );
         } else {
             echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
                 . Html::submitButton(
@@ -89,7 +113,7 @@ AppAsset::register($this);
         </div>
     </main>
 
-    <footer class="footer mt-auto py-3 text-muted">
+    <footer class="footer mt-auto py-3 text-muted bg-dark">
         <div class="container">
             <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
             <p class="float-end"><?= Yii::powered() ?></p>
